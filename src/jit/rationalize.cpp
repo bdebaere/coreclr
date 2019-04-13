@@ -566,7 +566,7 @@ Compiler::fgWalkResult Rationalizer::RewriteNode(GenTree** useEdge, Compiler::Ge
     //
     // NOTE: GT_FIELD_LIST head nodes, and GT_LIST nodes used by phi nodes will in fact be visited.
     for (GenTree* prev = node->gtPrev; prev != nullptr && prev->OperIsAnyList() && !(prev->OperIsFieldListHead());
-         prev          = node->gtPrev)
+         prev          = prev->gtPrev)
     {
         prev->gtFlags &= ~GTF_REVERSE_OPS;
         BlockRange().Remove(prev);
